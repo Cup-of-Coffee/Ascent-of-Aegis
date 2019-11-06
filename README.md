@@ -1,6 +1,6 @@
-# ascent-of-Aegis
+# Ascent of Aegis Character Calculator
 
-Ascent of Aegis
+Ascent of Aegis 
 
 
 
