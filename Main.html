@@ -128,18 +128,19 @@
             valorInput++;
          }
          var tempVarCounter = valor + valorInput;
+	 var tempVarHolder = 0;
          if(tempVarCounter > 0 && tempVarCounter <= 10){
-            valorCost = valorInput * 15;
+            valorCost+=15; // Temp changes made here!!!
             document.getElementById("valorCost").innerHTML = valorCost;
             traitCost = traitCost + valorCost;
             document.getElementById("traitCost").innerHTML = traitCost;
          }else if(tempVarCounter > 10 && tempVarCounter <= 20){
-            valorCost = valorInput * 15;
+            valorCost+=15;
             document.getElementById("valorCost").innerHTML = valorCost;
             traitCost = traitCost + valorCost;
             document.getElementById("traitCost").innerHTML = traitCost;
          }else if(tempVarCounter > 20 && tempVarCounter <= 30){
-            valorCost = valorInput * 10;
+            valorCost+=10; // Temp changes made here!!!
             document.getElementById("valorCost").innerHTML = valorCost;
             traitCost = traitCost + valorCost;
             document.getElementById("traitCost").innerHTML = traitCost;
