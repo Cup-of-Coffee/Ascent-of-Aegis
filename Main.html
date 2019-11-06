@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 
+
+	Author: CupofCoffee
+	Date: 11/3/2019
+	Purpose: To hold the character calculator for Ascent of Aegis.
+-->
+
+<head>
+
+   <title>Ascent of Aegis :: Character Creation</title>
+   <meta Charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link href="style.css" rel="stylesheet">
+
+   <script>
+      /** Default Traits - To hold the inputted values depending on race */
+      var valor = 0; var volition = 0; var finesse = 0; var cognition = 0;
+      var valorInput = 0; var volitionInput = 0; var finesseInput = 0; var cognitionInput = 0;
+      var valorCost = 0; var volitionCost = 0; var finesseCost = 0; var cognitionCost = 0; var traitCost = 0; var skillCost = 0; var costTotal = 0;
+      var valorTotal = 0; var volitionTotal = 0; var finesseTotal = 0; var cognitionTotal = 0;
+      var costOfEverything = 0;
+
+      /** Holds all of the secondary traits */
+      var awareness = (finesse + cognition) / 2; 
+      var presence = (valor + volition) / 2; 
+      var endurance = (valor + volition); 
+      var mana = volition * 2;
+      var experience = "300"; // Allow for base of 300 to be changed.
+
+      /** Combat Crafts : 10 exp to learn */
+      var berserker = "1"; // Either this or Small Weapons has no learning cost.
+      var smallWeapons = "1"; // Either this or Berserker has no learning cost.
+      var mediumWeapons = "1"; var largeWeapons = "1"; var maneuverability = "1"; var martialRanged = "1"; var simpleRanged = "1"; 
+      var siegeRanged = "1"; var combatTactics = "1"; var mountedWarfare = "1";
+      var defense = "1"; // No learning cost.
+
+      /** Common Crafts : 10 exp to learn */
+      var animalHandling = "1"; var athletics = "1"; var husbandry = "1"; var laborer = "1"; var riding = "1"; var survivalist = "1"; 
+      var seamanship = "1"; var thievery = "1";
+
+      /** Skilled Crafts : 20 exp to learn */
+      var appraiser = "1"; var art = "1"; var botany = "1"; var craftsman = "1"; var forging = "1"; var lorecraft = "1"; var mercantilism = "1"; 
+      var performance = "1"; var speechcraft = "1"; var tinkering = "1"; var underworld = "1";
+
+      /** Academic : 30 exp to learn */
+      var alchemy = "1"; var culture = "1"; var linguistics = "1"; var litigation = "1"; var savant = "1"; var language = "1";
+
+      /** Magic : 30 exp to learn */
+      var druidcraft = "1"; 
+  
+      // --- --- --- 
+
+      function getRace() { // The menu to select race :: 
+         var x = document.getElementById("raceSelect").value;
+         document.getElementById("raceTab").innerHTML = x;
+         if(x === "Alfar"){
+         document.getElementById("valorTab").innerHTML = valor = 40;
+         document.getElementById("volitionTab").innerHTML = volition = 45;
+         document.getElementById("finesseTab").innerHTML = finesse = 65;
+         document.getElementById("cognitionTab").innerHTML = cognition = 50;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Human"){   // Human Traits
+         valor = 50;
+         document.getElementById("valorTab").innerHTML = valor;
+         document.getElementById("volitionTab").innerHTML = volition = 50;
+         document.getElementById("finesseTab").innerHTML = finesse = 50;
+         document.getElementById("cognitionTab").innerHTML = cognition = 50;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Mountain Dweorg"){
+         document.getElementById("valorTab").innerHTML = valor = 35;
+         document.getElementById("volitionTab").innerHTML = volition = 40;
+         document.getElementById("finesseTab").innerHTML = finesse = 60;
+         document.getElementById("cognitionTab").innerHTML = cognition = 65;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Stoors(Leprauchanus)"){
+         document.getElementById("valorTab").innerHTML = valor = 35;
+         document.getElementById("volitionTab").innerHTML = volition = 45;
+         document.getElementById("finesseTab").innerHTML = finesse = 50;
+         document.getElementById("cognitionTab").innerHTML = cognition = 70;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Stoors(Shireling)"){
+         document.getElementById("valorTab").innerHTML = valor = 30;
+         document.getElementById("volitionTab").innerHTML = volition = 70;
+         document.getElementById("finesseTab").innerHTML = finesse = 55;
+         document.getElementById("cognitionTab").innerHTML = cognition = 45;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "SvartAlfar"){
+         document.getElementById("valorTab").innerHTML = valor = 50;
+         document.getElementById("volitionTab").innerHTML = volition = 40;
+         document.getElementById("finesseTab").innerHTML = finesse = 50;
+         document.getElementById("cognitionTab").innerHTML = cognition = 60;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Ungzefer"){
+         document.getElementById("valorTab").innerHTML = valor = 30;
+         document.getElementById("volitionTab").innerHTML = volition = 30;
+         document.getElementById("finesseTab").innerHTML = finesse = 80;
+         document.getElementById("cognitionTab").innerHTML = cognition = 30;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }else if(x === "Yrch"){
+         document.getElementById("valorTab").innerHTML = valor = 70;
+         document.getElementById("volitionTab").innerHTML = volition = 50;
+         document.getElementById("finesseTab").innerHTML = finesse = 40;
+         document.getElementById("cognitionTab").innerHTML = cognition = 40;
+         // document.getElementById("specialTab").innerHTML = race.x.special;
+         }  // Updating the total tabs
+         document.getElementById("valorTotal").innerHTML = valor + valorInput;
+         document.getElementById("volitionTotal").innerHTML = volition + volitionInput;
+         document.getElementById("finesseTotal").innerHTML = finesse + finesseInput;
+         document.getElementById("cognitionTotal").innerHTML = cognition + cognitionInput;
+         // Reset All of the Vars
+         valorInput = 0; volitionInput = 0; finesseInput = 0; cognitionInput = 0;
+         valorCost = 0; volitionCost = 0; finesseCost = 0; cognitionCost = 0; costTotal = 0;
+         valorTotal = 0; volitionTotal = 0; finesseTotal = 0; cognitionTotal = 0;
+         document.getElementById("valorCost").innerHTML = 0;
+         document.getElementById("volitionCost").innerHTML = 0;
+         document.getElementById("finesseCost").innerHTML = 0;
+         document.getElementById("cognitionCost").innerHTML = 0;
+         document.getElementById("traitCost").innerHTML = 0;
+      }
+   
+      // --- --- --- 
+
+      function valorIncrease(){ // Button to increase Valor ::  
+         if(valorInput < 100){
+            valorInput++;
+         }
+         var tempVarCounter = valor + valorInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            valorCost = valorInput * 10;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            valorCost = valorInput * 5;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            valorCost = valorInput * 2;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            valorCost = valorInput * 2;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            valorCost = valorInput * 5;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            valorCost = valorInput * 10;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            valorCost = valorInput * 20;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("valorTotal").innerHTML = valor + valorInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      function valorDecrease(){ // Button to decrease Valor :: 
+         if(valorInput > 0){
+            valorInput--;
+         }
+         var tempVarCounter = valor + valorInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            valorCost = valorInput * 10;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            valorCost = valorInput * 5;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            valorCost = valorInput * 2;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            valorCost = valorInput * 2;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            valorCost = valorInput * 5;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            valorCost = valorInput * 10;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            valorCost = valorInput * 15;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            valorCost = valorInput * 20;
+            document.getElementById("valorCost").innerHTML = valorCost;
+            traitCost = traitCost + valorCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("valorTotal").innerHTML = valor + valorInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      // --- --- ---
+
+      function volitionIncrease(){ // Button to increase Volition ::  
+         if(volitionInput < 100){
+            volitionInput++;
+         }
+         var tempVarCounter = volition + volitionInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            volitionCost = volitionInput * 10;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            volitionCost = volitionInput * 5;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            volitionCost = volitionInput * 2;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            volitionCost = volitionInput * 2;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            volitionCost = volitionInput * 5;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            volitionCost = volitionInput * 10;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            volitionCost = volitionInput * 20;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("volitionTotal").innerHTML = volition + volitionInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      function volitionDecrease(){ // Button to decrease Volition :: 
+         if(volitionInput > 0){
+            volitionInput--;
+         }
+         var tempVarCounter = volition + volitionInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            volitionCost = volitionInput * 10;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            volitionCost = volitionInput * 5;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            volitionCost = volitionInput * 2;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            volitionCost = volitionInput * 2;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            volitionCost = volitionInput * 5;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            volitionCost = volitionInput * 10;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            volitionCost = volitionInput * 15;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            volitionCost = volitionInput * 20;
+            document.getElementById("volitionCost").innerHTML = volitionCost;
+            traitCost = traitCost + volitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("volitionTotal").innerHTML = volition + volitionInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      // --- --- ---
+
+      function finesseIncrease(){ // Button to increase Finesse ::  
+         if(finesseInput < 100){
+            finesseInput++;
+         }
+         var tempVarCounter = finesse + finesseInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            finesseCost = finesseInput * 10;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            finesseCost = finesseInput * 5;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            finesseCost = finesseInput * 2;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            finesseCost = finesseInput * 2;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            finesseCost = finesseInput * 5;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            finesseCost = finesseInput * 10;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            finesseCost = finesseInput * 20;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("finesseTotal").innerHTML = finesse + finesseInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      function finesseDecrease(){ // Button to decrease Finesse :: 
+         if(finesseInput > 0){
+            finesseInput--;
+         }
+         var tempVarCounter = finesse + finesseInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            finesseCost = finesseInput * 10;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            finesseCost = finesseInput * 5;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            finesseCost = finesseInput * 2;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            finesseCost = finesseInput * 2;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            finesseCost = finesseInput * 5;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            finesseCost = finesseInput * 10;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            finesseCost = finesseInput * 15;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            finesseCost = finesseInput * 20;
+            document.getElementById("finesseCost").innerHTML = finesseCost;
+            traitCost = traitCost + finesseCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("finesseTotal").innerHTML = finesse + finesseInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      // --- --- ---
+
+      function cognitionIncrease(){ // Button to increase Cognition ::  
+         if(cognitionInput < 100){
+            cognitionInput++;
+         }
+         var tempVarCounter = cognition + cognitionInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            cognitionCost = cognitionInput * 10;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            cognitionCost = cognitionInput * 5;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            cognitionCost = cognitionInput * 2;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            cognitionCost = cognitionInput * 2;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            cognitionCost = cognitionInput * 5;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            cognitionCost = cognitionInput * 10;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            cognitionCost = cognitionInput * 20;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("cognitionTotal").innerHTML = cognition + cognitionInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      function cognitionDecrease(){ // Button to decrease Cognition ::  
+         if(cognitionInput > 0){
+            cognitionInput--;
+         }
+         var tempVarCounter = cognition + cognitionInput;
+         if(tempVarCounter > 0 && tempVarCounter < 10){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 10 && tempVarCounter < 20){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 20 && tempVarCounter < 30){
+            cognitionCost = cognitionInput * 10;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 30 && tempVarCounter < 40){
+            cognitionCost = cognitionInput * 5;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 40 && tempVarCounter < 50){
+            cognitionCost = cognitionInput * 2;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 50 && tempVarCounter < 60){
+            cognitionCost = cognitionInput * 2;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 60 && tempVarCounter < 70){
+            cognitionCost = cognitionInput * 5;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 70 && tempVarCounter < 80){
+            cognitionCost = cognitionInput * 10;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter >= 80 && tempVarCounter < 90){
+            cognitionCost = cognitionInput * 15;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }else if(tempVarCounter > 90 && tempVarCounter <= 99){
+            cognitionCost = cognitionInput * 20;
+            document.getElementById("cognitionCost").innerHTML = cognitionCost;
+            traitCost = traitCost + cognitionCost;
+            document.getElementById("traitCost").innerHTML = traitCost;
+         }
+         document.getElementById("cognitionTotal").innerHTML = cognition + cognitionInput;
+         //totalCost(); // Program to calculate and input the total cost.
+         console.log(tempVarCounter);
+      }
+
+      // --- --- --- 
+
+   </script>
+
+</head>
+
+<body>
+
+   <div id="radio" class="ui-buttonset">
+      Starting Experience: <input type="text" value="300" class="startingExperience">
+   </div>
+
+   <span>&nbsp;</span>
+
+   <form>
+      Select Race:
+      <select id="raceSelect" onchange="getRace()">
+         <option value="Alfar">Alfar</option>
+         <option value="Human">Human</option>
+         <option value="Mountain Dweorg">Mountain Dweorg</option>
+         <option value="Stoors(Leprauchanus)">Stoors(Leprauchanus)</option>
+         <option value="Stoors(Shireling)">Stoors(Shireling)</option>
+         <option value="SvartAlfar">SvartAlfar</option>
+         <option value="Ungzefer">Ungzefer</option>
+         <option value="Yrch">Yrch</option>
+      </select>
+   </form>
+   
+   <span>&nbsp;</span>
+
+   <h3>Selected: <span id="raceTab"></span></h3>
+
+   <span>&nbsp;</span>
+
+   <table>
+      <tbody>
+         <tr id="table">
+            <th>&nbsp;Trait&nbsp;</th>
+            <th>&nbsp;Racial&nbsp;</th>
+            <th>&nbsp;Input&nbsp;</th>
+            <th>&nbsp;Cost&nbsp;</th>
+            <th>&nbsp;Total&nbsp;</th>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Your combined strength, fitness, and boldness.">Valor </a></label></td>
+            <td><a id="valorTab"></a></td>
+            <td><button onclick="valorIncrease()">▲</button><button onclick="valorDecrease()">▼</button></td>
+            <td><a id="valorCost">0</a> EXP</td>
+            <td><a id="valorTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Your will, drive, and zeal.">Volition </a></label></td>
+            <td><a id="volitionTab"></a></td>
+            <td><button onclick="volitionIncrease()">▲</button><button onclick="volitionDecrease()">▼</button></td>
+            <td><a id="volitionCost">0</a> EXP</td>
+            <td><a id="volitionTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Your combined agility, reflex, speed, and grace.">Finesse </a></label></td>
+            <td><a id="finesseTab"></a></td>
+            <td><button onclick="finesseIncrease()">▲</button><button onclick="finesseDecrease()">▼</button></td>
+            <td><a id="finesseCost">0</a> EXP</td>
+            <td><a id="finesseTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Your combined ability to learn, reasoning, and insight.">Cognition </a></label></td>
+            <td><a id="cognitionTab"></a></td>
+            <td><button onclick="cognitionIncrease()">▲</button><button onclick="cognitionDecrease()">▼</button></td>
+            <td><a id="cognitionCost">0</a> EXP</td>
+            <td><a id="cognitionTotal"></a></td>
+         </tr>
+      </tbody>
+   </table>
+
+   <span>&nbsp;</span>
+   
+   <h3>Total Trait Cost: <span id="traitCost"></span></h3>
+   <h3>Total Skill Cost: <span id="skillCost"></span></h3>
+   <h3>Remaining: Number of Experience Left<span id="remaining"></span></h3>
+
+   <span>&nbsp;</span>
+
+   <footer>
+   
+   </footer>
+
+</body>
+
+</html>
