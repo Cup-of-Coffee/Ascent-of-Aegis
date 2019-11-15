@@ -165,29 +165,25 @@ function increase(typeOfTrait){ // Button to increase ::
         if(typeOfTrait == "Valor"){
             valorInput++;                                                   // 
             valorCost = traitCost;                                          // 
-            totalValor = newValue                                           // 
-            traitTotal(totalValor);                                         // Total EXP counter
+            totalValor = newValue                                           //
             document.getElementById("valorCost").innerHTML = valorCost;
             document.getElementById("valorTotal").innerHTML = totalValor;
         }else if(typeOfTrait == "Volition"){
             volitionInput++;
             volitionCost = traitCost;
             totalVolition = newValue
-            traitTotal(totalVolition);
             document.getElementById("volitionCost").innerHTML = volitionCost;
             document.getElementById("volitionTotal").innerHTML = totalVolition;
         }else if(typeOfTrait == "Finesse"){
             finesseInput++;
             finesseCost = traitCost;
             totalFinesse = newValue
-            traitTotal(totalFinesse);
             document.getElementById("finesseCost").innerHTML = finesseCost;
             document.getElementById("finesseTotal").innerHTML = totalFinesse;
         }else if(typeOfTrait == "Cognition"){
             cognitionInput++;
             cognitionCost = traitCost;
             totalCognition = newValue
-            traitTotal(totalCognition);
             document.getElementById("cognitionCost").innerHTML = cognitionCost;
             document.getElementById("cognitionTotal").innerHTML = totalCognition;
         }else{
@@ -232,31 +228,31 @@ function decrease(typeOfTrait){ // Button to decrease ::
         if(newValue > 0 && newValue <= 10){ //15
             traitCost = traitCost - 15;
             
-        }else if(newValue > 10 && newValue <= 20){ //15
+        }else if(newValue >= 10 && newValue < 20){ //15
             traitCost = traitCost - 15;
             
-        }else if(newValue > 20 && newValue <= 30){ //10
+        }else if(newValue >= 20 && newValue < 30){ //10
             traitCost = traitCost - 10;
 
-        }else if(newValue > 30 && newValue <= 40){ //5
+        }else if(newValue >= 30 && newValue < 40){ //5
             traitCost = traitCost - 5;
             
-        }else if(newValue > 40 && newValue <= 50){ //2
+        }else if(newValue >= 40 && newValue < 50){ //2
             traitCost = traitCost - 2;
 
-        }else if(newValue > 50 && newValue <= 60){ //2
+        }else if(newValue >= 50 && newValue < 60){ //2
             traitCost = traitCost - 2;
 
-        }else if(newValue > 60 && newValue <= 70){ //5
+        }else if(newValue >= 60 && newValue < 70){ //5
             traitCost = traitCost - 5;
 
-        }else if(newValue > 70 && newValue <= 80){ //10
+        }else if(newValue >= 70 && newValue < 80){ //10
             traitCost = traitCost - 10;
             
-        }else if(newValue > 80 && newValue <= 90){ //15
+        }else if(newValue >= 80 && newValue < 90){ //15
             traitCost = traitCost - 15;
             
-        }else if(newValue > 90 && newValue <= 100){ //20
+        }else if(newValue >= 90 && newValue < 100){ //20
             traitCost = traitCost - 20;
 
         }
@@ -300,8 +296,12 @@ function decrease(typeOfTrait){ // Button to decrease ::
 // - - - 
 
 function traitTotal(){
-    return totalTraitCost = valorCost + volitionCost + finesseCost + cognitionCost;
+    console.log("Valor: " + valorCost);
+    console.log("Volition: " + volitionCost);
+    console.log("Finesse" + finesseCost);
+    console.log("Cognition: " + cognitionCost);
+    totalTraitCost = valorCost + volitionCost + finesseCost + cognitionCost;
+    return totalTraitCost;
 }
 
 // - - - 
-
