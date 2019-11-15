@@ -95,7 +95,25 @@ function getRace() { // The menu to select race ::
     totalVolition = ChosenRace.raceVolition;
     totalFinesse = ChosenRace.raceFinesse;
     totalCognition = ChosenRace.raceCognition;
+
+    // Reseting Vars and fields.
+    valorInput = 0; volitionInput = 0; finesseInput = 0; cognitionInput = 0; newValue = 0;
+    valorCost = 0; volitionCost = 0; finesseCost = 0; cognitionCost = 0; traitCost = 0;
+    totalTraitCost = 0; 
+
+    totalValor = 0; totalVolition = 0; totalFinesse = 0; totalCognition = 0; 
     
+    traitTotal();
+    document.getElementById("valorCost").innerHTML = 0;
+    document.getElementById("volitionCost").innerHTML = 0;
+    document.getElementById("finesseCost").innerHTML = 0;
+    document.getElementById("cognitionCost").innerHTML = 0;
+    document.getElementById("valorTotal").innerHTML = ChosenRace.raceValor;
+    document.getElementById("volitionTotal").innerHTML = ChosenRace.raceVolition;
+    document.getElementById("finesseTotal").innerHTML = ChosenRace.raceFinesse;
+    document.getElementById("cognitionTotal").innerHTML = ChosenRace.raceCognition;
+    document.getElementById("traitCostTotal").innerHTML = 0;
+
 }
 
 // - - - 
@@ -296,12 +314,9 @@ function decrease(typeOfTrait){ // Button to decrease ::
 // - - - 
 
 function traitTotal(){
-    console.log("Valor: " + valorCost);
-    console.log("Volition: " + volitionCost);
-    console.log("Finesse" + finesseCost);
-    console.log("Cognition: " + cognitionCost);
     totalTraitCost = valorCost + volitionCost + finesseCost + cognitionCost;
     return totalTraitCost;
 }
 
 // - - - 
+
