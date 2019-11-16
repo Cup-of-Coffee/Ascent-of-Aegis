@@ -24,7 +24,7 @@
    <h1>Ascent of Aegis Character Calculator V 1.0</h1>
 
    <div id="radio" class="ui-buttonset">
-      Starting Experience: <input type="text" value="300" class="startingExperience">
+      Starting Experience: <input type="text" value="300" id="startingValue" onchange="startingExperience()">
    </div>
 
    <span>&nbsp;</span>
@@ -218,7 +218,7 @@
             <td><a id="laborerTab"></a></td>
             <td><button onclick="craftIncrease(`Laborer`)">▲</button><button onclick="craftDecrease(`Laborer`)">▼</button></td>
             <td><a id="laborerCost">0</a> EXP</td>
-            <td><a id="laborerotal"></a></td>
+            <td><a id="laborerTotal"></a></td>
          </tr>
          <tr>
             <td><label><a href="#" title="Knowledge of riding, generally horses, that contains leading with reins, riding equipment, techniques such as riding without reins by applying pressure with your hips and legs.">Riding </a></label></td>
