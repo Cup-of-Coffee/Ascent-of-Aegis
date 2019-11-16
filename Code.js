@@ -286,12 +286,12 @@ var combatCrafts = {
 }
     */
 
-var berserker = new CraftConstructor("Berserker",10,0,0); var smallWeapons = new CraftConstructor("Small Weapons",10,0,0);
+var berserker = new CraftConstructor("Berserker",0,1,0); var smallWeapons = new CraftConstructor("Small Weapons",10,0,0);
 var mediumWeapons = new CraftConstructor("Medium Weapons",10,0,0); var largeWeapons = new CraftConstructor("Large Weapons",10,0,0);
 var maneuverability	= new CraftConstructor("Maneuverability",10,0,0); var martialRanged = new CraftConstructor("Martial Ranged",10,0,0);
 var simpleRanged = new CraftConstructor("Simple Ranged",10,0,0); var siegeRanged = new CraftConstructor("Siege Ranged",10,0,0);
 var mountedArchery = new CraftConstructor("Mounted Archery",10,0,0); var combatTactics = new CraftConstructor("Combat Tactics",10,0,0);
-var defense = new CraftConstructor("Defense",10,0,0);
+var defense = new CraftConstructor("Defense",0,1,0);
 
     // Common Crafts
 
