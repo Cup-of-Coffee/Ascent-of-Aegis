@@ -30,28 +30,24 @@
    <form>
       Select Race:
       <select id="raceSelect" onchange="getRace()">
-         <option>Choose</option>
-         <option value="Alfar">Alfar</option>
-         <option value="Human">Human</option>
-         <option value="Mountain Dweorg">Mountain Dweorg</option>
-         <option value="Stoors(Leprauchanus)">Stoors(Leprauchanus)</option>
-         <option value="Stoors(Shireling)">Stoors(Shireling)</option>
-         <option value="SvartAlfar">SvartAlfar</option>
-         <option value="Ungzefer">Ungzefer</option>
-         <option value="Yrch">Yrch</option>
+         <option value="choose">Choose</option>
+         <option value="alfar">Alfar</option>
+         <option value="human">Human</option>
+         <option value="mountainDweorg">Mountain Dweorg</option>
+         <option value="stoorsLeprauchanus">Stoors(Leprauchanus)</option>
+         <option value="stoorsShireling">Stoors(Shireling)</option>
+         <option value="svartAlfar">SvartAlfar</option>
+         <option value="ungzefer">Ungzefer</option>
+         <option value="yrch">Yrch</option>
       </select>
    </form>
-   
-   <span>&nbsp;</span>
-
-   <h3>Selected: <span id="raceTab"></span></h3>
 
    <span>&nbsp;</span>
 
    <table>
       <tbody>
          <tr id="table">
-            <th>&nbsp;Trait&nbsp;</th>
+            <th>&nbsp;Traits&nbsp;</th>
             <th>&nbsp;Racial&nbsp;</th>
             <th>&nbsp;Input&nbsp;</th>
             <th>&nbsp;Cost&nbsp;</th>
@@ -60,28 +56,28 @@
          <tr>
             <td><label><a href="#" title="Your combined strength, fitness, and boldness.">Valor </a></label></td>
             <td><a id="valorTab"></a></td>
-            <td><button onclick="increase('Valor')">▲</button><button onclick="decrease(`Valor`)">▼</button></td>
+            <td><button onclick="traitIncrease('Valor')">▲</button><button onclick="traitDecrease(`Valor`)">▼</button></td>
             <td><a id="valorCost">0</a> EXP</td>
             <td><a id="valorTotal"></a></td>
          </tr>
          <tr>
             <td><label><a href="#" title="Your will, drive, and zeal.">Volition </a></label></td>
             <td><a id="volitionTab"></a></td>
-            <td><button onclick="increase(`Volition`)">▲</button><button onclick="decrease(`Volition`)">▼</button></td>
+            <td><button onclick="traitIncrease(`Volition`)">▲</button><button onclick="traitDecrease(`Volition`)">▼</button></td>
             <td><a id="volitionCost">0</a> EXP</td>
             <td><a id="volitionTotal"></a></td>
          </tr>
          <tr>
             <td><label><a href="#" title="Your combined agility, reflex, speed, and grace.">Finesse </a></label></td>
             <td><a id="finesseTab"></a></td>
-            <td><button onclick="increase(`Finesse`)">▲</button><button onclick="decrease(`Finesse`)">▼</button></td>
+            <td><button onclick="traitIncrease(`Finesse`)">▲</button><button onclick="traitDecrease(`Finesse`)">▼</button></td>
             <td><a id="finesseCost">0</a> EXP</td>
             <td><a id="finesseTotal"></a></td>
          </tr>
          <tr>
             <td><label><a href="#" title="Your combined ability to learn, reasoning, and insight.">Cognition </a></label></td>
             <td><a id="cognitionTab"></a></td>
-            <td><button onclick="increase(`Cognition`)">▲</button><button onclick="decrease(`Cognition`)">▼</button></td>
+            <td><button onclick="traitIncrease(`Cognition`)">▲</button><button onclick="traitDecrease(`Cognition`)">▼</button></td>
             <td><a id="cognitionCost">0</a> EXP</td>
             <td><a id="cognitionTotal"></a></td>
          </tr>
@@ -91,13 +87,314 @@
    <span>&nbsp;</span>
    
    <h3>Total Traits Cost: <span id="traitCostTotal"></span></h3>
-   <h3>Total Skill Cost: <span id="skillCost"></span></h3>
-   <h3>Remaining: Number of Experience Left<span id="remaining"></span></h3>
+
+   <span>&nbsp;</span>
+
+   <table>
+      <tbody>
+         <tr id="table">
+            <th>&nbsp;Crafts&nbsp;</th>
+            <th>&nbsp;Racial&nbsp;</th>
+            <th>&nbsp;Input&nbsp;</th>
+            <th>&nbsp;Cost&nbsp;</th>
+            <th>&nbsp;Total&nbsp;</th>
+         </tr>
+         <tr>
+            <th><a href="#" title="Cost 10 Experience to learn.">Combat Crafts</a></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Fists, fist related weapons, and natural weapons.">Berserker </a></label></td>
+            <td><a id="berserkerTab"></a></td>
+            <td><button onclick="craftIncrease('Berserker')">▲</button><button onclick="craftDecrease(`Berserker`)">▼</button></td>
+            <td><a id="berserkerCost">0</a> EXP</td>
+            <td><a id="berserkerTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="If it’s 1 handed and about 2 pounds or less then you’ll be using this.">Small Weapons </a></label></td>
+            <td><a id="smallWeaponsTab"></a></td>
+            <td><button onclick="craftIncrease(`Small Weapons`)">▲</button><button onclick="craftDecrease(`Small Weapons`)">▼</button></td>
+            <td><a id="smallWeaponsCost">0</a> EXP</td>
+            <td><a id="smallWeaponsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="These are one handed weapons that are about 4 pounds and heavier.">Medium Weapons </a></label></td>
+            <td><a id="mediumWeaponsTab"></a></td>
+            <td><button onclick="craftIncrease(`Medium Weapons`)">▲</button><button onclick="craftDecrease(`Medium Weapons`)">▼</button></td>
+            <td><a id="mediumWeaponsCost">0</a> EXP</td>
+            <td><a id="mediumWeaponsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="If it requires both hands this will be the craft to use.">Large Weapons </a></label></td>
+            <td><a id="largeWeaponsTab"></a></td>
+            <td><button onclick="craftIncrease(`Large Weapons`)">▲</button><button onclick="craftDecrease(`Large Weapons`)">▼</button></td>
+            <td><a id="largeWeaponsCost">0</a> EXP</td>
+            <td><a id="largeWeaponsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to wear and use armors without restrictions or decreasing impairments. Maneuverability reduces armor penalties by 5 for every 25 ranks in the craft.">Maneuverability </a></label></td>
+            <td><a id="maneuverabilityTab"></a></td>
+            <td><button onclick="craftIncrease(`Maneuverability`)">▲</button><button onclick="craftDecrease(`Maneuverability`)">▼</button></td>
+            <td><a id="maneuverabilityCost">0</a> EXP</td>
+            <td><a id="maneuverabilityTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Has a medium and maximum range. Bows, crossbows, and javelins. (Oh my!).">Martial Ranged </a></label></td>
+            <td><a id="martialRangedTab"></a></td>
+            <td><button onclick="craftIncrease(`Martial Ranged`)">▲</button><button onclick="craftDecrease(`Martial Ranged`)">▼</button></td>
+            <td><a id="martialRangedCost">0</a> EXP</td>
+            <td><a id="martialRangedTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Has a medium and maximum range. Slings, daggers, and spears.">Simple Ranged </a></label></td>
+            <td><a id="simpleRangedTab"></a></td>
+            <td><button onclick="craftIncrease(`Simple Ranged`)">▲</button><button onclick="craftDecrease(`Simple Ranged`)">▼</button></td>
+            <td><a id="simpleRangedCost">0</a> EXP</td>
+            <td><a id="simpleRangedTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Has a medium and maximum range. If it's as big as a horse then you'll need this.">Siege Ranged </a></label></td>
+            <td><a id="siegeRangedTab"></a></td>
+            <td><button onclick="craftIncrease(`Siege Ranged`)">▲</button><button onclick="craftDecrease(`Siege Ranged`)">▼</button></td>
+            <td><a id="siegeRangedCost">0</a> EXP</td>
+            <td><a id="siegeRangedTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="For using ranged crafts on horseback.">Mounted Archery </a></label></td>
+            <td><a id="mountedArcheryTab"></a></td>
+            <td><button onclick="craftIncrease(`Mounted Archery`)">▲</button><button onclick="craftDecrease(`Mounted Archery`)">▼</button></td>
+            <td><a id="mountedArcheryCost">0</a> EXP</td>
+            <td><a id="mountedArcheryTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="This contains leading soldiers, understanding orders, and basic combat skills. (A skilled tactician can even predict his opponent's moves before they make them). Roll vs. commander or opponents Combat Tactics or Cognition to declare your actions after they declare theirs. You may also use this craft to rally and lead others in combat.">Combat Tactics </a></label></td>
+            <td><a id="combatTacticsTab"></a></td>
+            <td><button onclick="craftIncrease(`Combat Tactics`)">▲</button><button onclick="craftDecrease(`Combat Tactics`)">▼</button></td>
+            <td><a id="combatTacticsCost">0</a> EXP</td>
+            <td><a id="combatTacticsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="This calculates into your defense rating.">Defense </a></label></td>
+            <td><a id="defenseTab"></a></td>
+            <td><button onclick="craftIncrease(`Defense`)">▲</button><button onclick="craftDecrease(`Defense`)">▼</button></td>
+            <td><a id="defenseCost">0</a> EXP</td>
+            <td><a id="defenseTotal"></a></td>
+         </tr>
+         <tr>
+            <th><a href="#" title="Cost 10 Experience to learn.">Common Crafts</a></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to capture, train, and understand animals.">Animal Handling </a></label></td>
+            <td><a id="animalHandlingTab"></a></td>
+            <td><button onclick="craftIncrease(`Animal Handling`)">▲</button><button onclick="craftDecrease(`Animal Handling`)">▼</button></td>
+            <td><a id="animalHandlingCost">0</a> EXP</td>
+            <td><a id="animalHandlingTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The training of one's body. This may be used to climb walls, jump distances, or swim.">Athletics </a></label></td>
+            <td><a id="athleticsTab"></a></td>
+            <td><button onclick="craftIncrease(`Athletics`)">▲</button><button onclick="craftDecrease(`Athletics`)">▼</button></td>
+            <td><a id="athleticsCost">0</a> EXP</td>
+            <td><a id="athleticsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to care for, cultivate, and breed common crops and animals.">Husbandry </a></label></td>
+            <td><a id="husbandryTab"></a></td>
+            <td><button onclick="craftIncrease(`Husbandry`)">▲</button><button onclick="craftDecrease(`Husbandry`)">▼</button></td>
+            <td><a id="husbandryCost">0</a> EXP</td>
+            <td><a id="husbandryTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to do minor labor such as carrying lumber, following the orders of a craftsman to build a home, or determine the competence and regime of workers around you.">Laborer </a></label></td>
+            <td><a id="laborerTab"></a></td>
+            <td><button onclick="craftIncrease(`Laborer`)">▲</button><button onclick="craftDecrease(`Laborer`)">▼</button></td>
+            <td><a id="laborerCost">0</a> EXP</td>
+            <td><a id="laborerotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Knowledge of riding, generally horses, that contains leading with reins, riding equipment, techniques such as riding without reins by applying pressure with your hips and legs.">Riding </a></label></td>
+            <td><a id="ridingTab"></a></td>
+            <td><button onclick="craftIncrease(`Riding`)">▲</button><button onclick="craftDecrease(`Riding`)">▼</button></td>
+            <td><a id="ridingCost">0</a> EXP</td>
+            <td><a id="ridingTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to withstand nature, identify common useful or dangerous fauna and flora, and the training of one’s instinct.">Survivalist </a></label></td>
+            <td><a id="survivalistTab"></a></td>
+            <td><button onclick="craftIncrease(`Survivalist`)">▲</button><button onclick="craftDecrease(`Survivalist`)">▼</button></td>
+            <td><a id="survivalistCost">0</a> EXP</td>
+            <td><a id="survivalistTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The ability to crew a vessel. Performing basic tasks such as manning the sails, rowing, and setting way.">Seamanship </a></label></td>
+            <td><a id="seamanshipTab"></a></td>
+            <td><button onclick="craftIncrease(`Seamanship`)">▲</button><button onclick="craftDecrease(`Seamanship`)">▼</button></td>
+            <td><a id="seamanshipCost">0</a> EXP</td>
+            <td><a id="seamanshipTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Picking pockets, throwing your voice, detecting a cheater, or avoiding being detected. Thievery has many practical uses.">Thievery </a></label></td>
+            <td><a id="thieveryTab"></a></td>
+            <td><button onclick="craftIncrease(`Thievery`)">▲</button><button onclick="craftDecrease(`Thievery`)">▼</button></td>
+            <td><a id="thieveryCost">0</a> EXP</td>
+            <td><a id="thieveryTotal"></a></td>
+         </tr>
+         <tr>
+            <th><a href="#" title="Cost 20 Experience to learn.">Skilled Crafts</a></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Music, theatre, organizing various shows, and awareness of the current cultured world, fall in this category.">Art </a></label></td>
+            <td><a id="artTab"></a></td>
+            <td><button onclick="craftIncrease(`Art`)">▲</button><button onclick="craftDecrease(`Art`)">▼</button></td>
+            <td><a id="artCost">0</a> EXP</td>
+            <td><a id="artTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Breeding plants, growing plants, identifying flora, and making plant based potions.">Botany </a></label></td>
+            <td><a id="botanyTab"></a></td>
+            <td><button onclick="craftIncrease(`Botany`)">▲</button><button onclick="craftDecrease(`Botany`)">▼</button></td>
+            <td><a id="botanyCost">0</a> EXP</td>
+            <td><a id="botanyTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Craftsman can make various things from castles, fortifications, all the way to a simple wooden chair.">Craftsman </a></label></td>
+            <td><a id="craftsmanTab"></a></td>
+            <td><button onclick="craftIncrease(`Craftsman`)">▲</button><button onclick="craftDecrease(`Craftsman`)">▼</button></td>
+            <td><a id="craftsmanCost">0</a> EXP</td>
+            <td><a id="craftsmanTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="All things armor and weaponry. This contains leatherwork, fletching, and smithing.">Forging </a></label></td>
+            <td><a id="forgingTab"></a></td>
+            <td><button onclick="craftIncrease(`Forging`)">▲</button><button onclick="craftDecrease(`Forging`)">▼</button></td>
+            <td><a id="forgingCost">0</a> EXP</td>
+            <td><a id="forgingTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The study and verification of various lore. Beast Lore, arcane lore, ability to identify languages, and any superstitions. (This includes storytelling).">Lorecraft </a></label></td>
+            <td><a id="lorecraftTab"></a></td>
+            <td><button onclick="craftIncrease(`Lorecraft`)">▲</button><button onclick="craftDecrease(`Lorecraft`)">▼</button></td>
+            <td><a id="lorecraftCost">0</a> EXP</td>
+            <td><a id="lorecraftTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Haggling, running a business, or knowing what supplies to buy for a caravan.">Mercantilism </a></label></td>
+            <td><a id="mercantilismTab"></a></td>
+            <td><button onclick="craftIncrease(`Mercantilism`)">▲</button><button onclick="craftDecrease(`Mercantilism`)">▼</button></td>
+            <td><a id="mercantilismCost">0</a> EXP</td>
+            <td><a id="mercantilismTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Acrobatics, juggling, acting, and even choreographed fighting fall in performance.">Performance </a></label></td>
+            <td><a id="performanceTab"></a></td>
+            <td><button onclick="craftIncrease(`Performance`)">▲</button><button onclick="craftDecrease(`Performance`)">▼</button></td>
+            <td><a id="performanceCost">0</a> EXP</td>
+            <td><a id="performanceTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Picking locks and crafting them, making puzzle boxes, designing and making mechanisms, (small, large, or clockwork).">Tinkering </a></label></td>
+            <td><a id="tinkeringTab"></a></td>
+            <td><button onclick="craftIncrease(`Tinkering`)">▲</button><button onclick="craftDecrease(`Tinkering`)">▼</button></td>
+            <td><a id="tinkeringCost">0</a> EXP</td>
+            <td><a id="tinkeringTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The intimate knowledge of the workings of the criminal world. This can be used to find information brokers, uncover major crime, effectively case and plan criminal activity, or avoid being detected. Adds Underworld language. (This can be used to watch the habits of a target to carry out an assassination).">Underworld </a></label></td>
+            <td><a id="underworldTab"></a></td>
+            <td><button onclick="craftIncrease(`Underworld`)">▲</button><button onclick="craftDecrease(`Underworld`)">▼</button></td>
+            <td><a id="underworldCost">0</a> EXP</td>
+            <td><a id="underworldTotal"></a></td>
+         </tr>
+         <tr>
+            <th><a href="#" title="Cost 30 Experience to learn.">Academic Crafts</a></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Creating and identifying poisons, potions, powders, or any medicinal creations (legal or otherwise).">Alchemy </a></label></td>
+            <td><a id="alchemyTab"></a></td>
+            <td><button onclick="craftIncrease(`Alchemy`)">▲</button><button onclick="craftDecrease(`Alchemy`)">▼</button></td>
+            <td><a id="alchemyCost">0</a> EXP</td>
+            <td><a id="alchemyTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The intimate knowledge of a specific region's culture as a whole. This includes how history shaped the region and the customs of the people.">Culture </a></label></td>
+            <td><a id="cultureTab"></a></td>
+            <td><button onclick="craftIncrease(`Culture`)">▲</button><button onclick="craftDecrease(`Culture`)">▼</button></td>
+            <td><a id="cultureCost">0</a> EXP</td>
+            <td><a id="cultureTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="This is one language of your choice from the linguistics craft. You become fluent in that language. This cannot be rolled.">Language </a></label></td>
+            <td><a id="languageTab"></a></td>
+            <td><button onclick="craftIncrease(`Language`)">▲</button><button onclick="craftDecrease(`Language`)">▼</button></td>
+            <td><a id="languageCost">0</a> EXP</td>
+            <td><a id="languageTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The study and practice of languages. A character earns 1 language for every 10 ranks, and may be able to identify languages with this craft.">Linguistics </a></label></td>
+            <td><a id="linguisticsTab"></a></td>
+            <td><button onclick="craftIncrease(`Linguistics`)">▲</button><button onclick="craftDecrease(`Linguistics`)">▼</button></td>
+            <td><a id="linguisticsCost">0</a> EXP</td>
+            <td><a id="linguisticsTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="Ability to represent someone in court, diplomatic negotiation, drafting a contract, and delivering a speech.">Litigation </a></label></td>
+            <td><a id="litigationTab"></a></td>
+            <td><button onclick="craftIncrease(`Litigation`)">▲</button><button onclick="craftDecrease(`Litigation`)">▼</button></td>
+            <td><a id="litigationCost">0</a> EXP</td>
+            <td><a id="litigationTotal"></a></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The application of problem solving, mathematics, geography, and history. Savant can almost always be used in place of a COG check.">Savant </a></label></td>
+            <td><a id="savantTab"></a></td>
+            <td><button onclick="craftIncrease(`Savant`)">▲</button><button onclick="craftDecrease(`Savant`)">▼</button></td>
+            <td><a id="savantCost">0</a> EXP</td>
+            <td><a id="savantTotal"></a></td>
+         </tr>
+         <tr>
+            <th><a href="#" title="Cost 30 Experience to learn.">Magic Crafts</a></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>
+         <tr>
+            <td><label><a href="#" title="The practice of magic as a whole. All magic falls under the same roof but of various schools. A magician may choose to forgo all other schools and only specialize in one for the benefit of increasing magnitude by 1 tier, (if you do not have magnitude unlocked yet then you get the effects of one tier of magnitude). Anyone who takes magic gets the language Archaen at no cost. All magical scripts are written in Archaen.">Druidcraft </a></label></td>
+            <td><a id="druidcraftTab"></a></td>
+            <td><button onclick="craftIncrease(`Druidcraft`)">▲</button><button onclick="craftDecrease(`Druidcraft`)">▼</button></td>
+            <td><a id="druidcraftCost">0</a> EXP</td>
+            <td><a id="druidcraftTotal"></a></td>
+         </tr>
+      </tbody>
+   </table>
+
+   <span>&nbsp;</span>
+
+   <h3>Total Crafts Cost: <span id="craftCostTotal"></span></h3>
+   
+   <span>&nbsp;</span>
+
+   <h3>Total Cost: <span id="costTotal"></span></h3>
+   <h3>Remaining Experience: <span id="Remaining"></span></h3>
 
    <span>&nbsp;</span>
 
    <footer>
-   
+      <a href="https://docs.google.com/document/d/19owuKIPzlXC04CRKleBuDUSQIrR5fq7Wb_19NJEwWPY/edit#heading=h.m07eo5fa75v"> Ascent of Aegis Document</a>
    </footer>
 
 </body>
