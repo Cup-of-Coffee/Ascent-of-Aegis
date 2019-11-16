@@ -273,6 +273,7 @@ function CraftConstructor(craftName,learningCost,craftValue,craftCost){ // Const
 
     // Combat Crafts
 
+    /* TESTING
 var combatCrafts = {
     berserker: new CraftConstructor("Berserker",10,0,0), smallWeapons: new CraftConstructor("Small Weapons",10,0,0), 
     mediumWeapons: new CraftConstructor("Medium Weapons",10,0,0), largeWeapons: new CraftConstructor("Large Weapons",10,0,0),
@@ -281,51 +282,70 @@ var combatCrafts = {
     mountedArchery: new CraftConstructor("Mounted Archery",10,0,0), combatTactics : new CraftConstructor("Combat Tactics",10,0,0),
     defense: new CraftConstructor("Defense",10,0,0)
 }
+    */
 
-/* OLD
 var berserker = new CraftConstructor("Berserker",10,0,0); var smallWeapons = new CraftConstructor("Small Weapons",10,0,0);
 var mediumWeapons = new CraftConstructor("Medium Weapons",10,0,0); var largeWeapons = new CraftConstructor("Large Weapons",10,0,0);
 var maneuverability	= new CraftConstructor("Maneuverability",10,0,0); var martialRanged = new CraftConstructor("Martial Ranged",10,0,0);
 var simpleRanged = new CraftConstructor("Simple Ranged",10,0,0); var siegeRanged = new CraftConstructor("Siege Ranged",10,0,0);
 var mountedArchery = new CraftConstructor("Mounted Archery",10,0,0); var combatTactics = new CraftConstructor("Combat Tactics",10,0,0);
 var defense = new CraftConstructor("Defense",10,0,0);
-*/ 
 
     // Common Crafts
 
+    /* TESTING
 var commonCrafts = {
     animalHandling: new CraftConstructor("animalHandling",20,0,0), athletics: new CraftConstructor("athletics",20,0,0),
     husbandry: new CraftConstructor("Husbandry",20,0,0), laborer: new CraftConstructor("laborer",20,0,0),
     riding: new CraftConstructor("Riding",20,0,0), survivalist: new CraftConstructor("Survivalist",20,0,0),
     seamanship: new CraftConstructor("Seamanship",20,0,0), thievery: new CraftConstructor("Thievery",20,0,0)
 }
+    */
 
-/* OLD
 var animalHandling = new CraftConstructor("Animal Handling",20,0,0); var athletics = new CraftConstructor("Athletics",20,0,0);
 var husbandry = new CraftConstructor("Husbandry",20,0,0); var laborer = new CraftConstructor("Laborer",20,0,0);
 var riding = new CraftConstructor("Riding",20,0,0); var survivalist = new CraftConstructor("Survivalist",20,0,0);
 var seamanship = new CraftConstructor("Seamanship",20,0,0); var thievery = new CraftConstructor("Thievery",20,0,0);
-*/
 
     // Skilled Crafts
 
-var skilledCrafts
+    /* TESTING
+var skilledCrafts = {
+    art: new CraftConstructor("Art",30,0,0), botany: new CraftConstructor("Botany",30,0,0),
+    craftsman: new CraftConstructor("Craftsman",30,0,0), forging: new CraftConstructor("Forging",30,0,0),
+    lorecraft: new CraftConstructor("Lorecraft",30,0,0), mercantilism: new CraftConstructor("Mercantilism",30,0,0),
+    performance: new CraftConstructor("Performance",30,0,0), tinkering: new CraftConstructor("Tinkering",30,0,0),
+    underworld: new CraftConstructor("Underworld",30,0,0)
+}
+    */
 
-/* OLD
 var art = new CraftConstructor("Art",30,0,0); var botany = new CraftConstructor("Botany",30,0,0);
 var craftsman = new CraftConstructor("Craftsman",30,0,0); var forging = new CraftConstructor("Forging",30,0,0);
 var lorecraft = new CraftConstructor("Lorecraft",30,0,0); var mercantilism = new CraftConstructor("Mercantilism",30,0,0);
 var performance = new CraftConstructor("Performance",30,0,0); var tinkering = new CraftConstructor("Tinkering",30,0,0);
 var underworld = new CraftConstructor("Underworld",30,0,0);
-*/
 
     // Academic Crafts
+
+    /* TESTING
+var academicCrafts = {
+    alchemy: new CraftConstructor("Alchemy",30,0,0), culture: new CraftConstructor("Culture",30,0,0),
+    language: new CraftConstructor("Language",30,0,0), linguistics: new CraftConstructor("Linguistics",30,0,0),
+    litigation: new CraftConstructor("Litigation",30,0,0), savant: new CraftConstructor("Savant",30,0,0)
+}
+    */
 
 var alchemy = new CraftConstructor("Alchemy",30,0,0); var culture = new CraftConstructor("Culture",30,0,0);
 var language = new CraftConstructor("Language",30,0,0); var linguistics = new CraftConstructor("Linguistics",30,0,0);
 var litigation = new CraftConstructor("Litigation",30,0,0); var savant = new CraftConstructor("Savant",30,0,0);
 
     // Magic Crafts
+
+    /* TESTING
+var magicCrafts = {
+    druidcraft: new CraftConstructor("Druidcraft",30,0,0) 
+}
+    */
 
 var druidcraft = new CraftConstructor("Druidcraft",30,0,0);
 
@@ -334,7 +354,7 @@ var druidcraft = new CraftConstructor("Druidcraft",30,0,0);
 var tempCraftValue = 0; var tempCraftCost = 0; var tempLearningCost = 0;
 
 function craftIncrease(typeOfCraft){ // Button to increase :: 
-    var limit = true;  // bypass everything
+    var limit = true;  // bypass everything if false
 
     if(typeOfCraft == "Berserker" && berserker.craftValue >= 0 && berserker.craftValue <= 100){                             // Combat Crafts
         tempCraftValue = berserker.craftValue + 1;     // The craft's value being increased.
@@ -500,8 +520,8 @@ function craftIncrease(typeOfCraft){ // Button to increase ::
     }
 
     if(typeOfCraft == "Berserker" && limit == true){                             // Combat Crafts
-        berserker.craftValue = tempCraftValue;          // The changed craft's value being returned.
-        berserker.craftCost = tempCraftCost;            // The craft's total cost being returned.
+        berserker.craftValue = tempCraftValue;                                   // The changed craft's value being returned.
+        berserker.craftCost = tempCraftCost;                                     // The craft's total cost being returned.
         document.getElementById("berserkerCost").innerHTML = berserker.craftCost;
         document.getElementById("berserkerTotal").innerHTML = berserker.craftValue;
     }else if(typeOfCraft == "Small Weapons" && limit == true){
@@ -523,83 +543,83 @@ function craftIncrease(typeOfCraft){ // Button to increase ::
         xx.craftValue = tempCraftValue;
         xx.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Siege Ranged" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        siegeRanged.craftValue = tempCraftValue;
+        siegeRanged.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Mounted Archery" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        mountedArchery.craftValue = tempCraftValue;
+        mountedArchery.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Combat Tactics" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        mountedArchery.craftValue = tempCraftValue;
+        mountedArchery.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Defense" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        defense.craftValue = tempCraftValue;
+        defense.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Animal Handling" && limit == true){        // Common Crafts
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        animalHandling.craftValue = tempCraftValue;
+        animalHandling.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Athletics" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        athletics.craftValue = tempCraftValue;
+        athletics.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Husbandry" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        husbandry.craftValue = tempCraftValue;
+        husbandry.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Laborer" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        laborer.craftValue = tempCraftValue;
+        laborer.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Riding" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        riding.craftValue = tempCraftValue;
+        riding.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Survivalist" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        survivalist.craftValue = tempCraftValue;
+        survivalist.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Seamanship" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        seamanship.craftValue = tempCraftValue;
+        seamanship.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Thievery" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        thievery.craftValue = tempCraftValue;
+        thievery.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Art" && limit == true){                        // Skilled Crafts
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        art.craftValue = tempCraftValue;
+        art.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Botany" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        botany.craftValue = tempCraftValue;
+        botany.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Craftsman" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        craftsman.craftValue = tempCraftValue;
+        craftsman.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Forging" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        forging.craftValue = tempCraftValue;
+        forging.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Mercantilism" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        mercantilism.craftValue = tempCraftValue;
+        mercantilism.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Performance" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        performance.craftValue = tempCraftValue;
+        performance.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Tinkering" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        tinkering.craftValue = tempCraftValue;
+        tinkering.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Underworld" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        underworld.craftValue = tempCraftValue;
+        underworld.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Alchemy" && limit == true){                          // Academic Crafts
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        alchemy.craftValue = tempCraftValue;
+        alchemy.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Culture" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        culture.craftValue = tempCraftValue;
+        culture.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Language" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        language.craftValue = tempCraftValue;
+        language.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Linguistics" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        linguistics.craftValue = tempCraftValue;
+        linguistics.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Litigation" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        litigation.craftValue = tempCraftValue;
+        litigation.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Savant" && limit == true){
-        xx.craftValue = tempCraftValue;
-        xx.craftCost = tempCraftCost;
+        savant.craftValue = tempCraftValue;
+        savant.craftCost = tempCraftCost;
     }else if(typeOfCraft == "Druidcraft" && limit == true){                         // Magic Crafts
         druidcraft.craftValue = tempCraftValue;
         druidcraft.craftCost = tempCraftCost;
@@ -611,8 +631,12 @@ function craftIncrease(typeOfCraft){ // Button to increase ::
 
 // - - - 
 
+function craftTotal(){
+    totalCraftCost = 1;     // TODO: Add the total of the crafts together here.
+    return totalCraftCost;
+}
 
-
+// - - - 
 
 
 // - - - 
@@ -621,14 +645,9 @@ function craftIncrease(typeOfCraft){ // Button to increase ::
 
 
 
-
-
-
-
-
-
-
-
 // - - - EXPERIENCE
+
+
+
 
 
