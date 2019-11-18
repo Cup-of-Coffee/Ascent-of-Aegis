@@ -301,8 +301,8 @@ var seamanship = new CraftConstructor("seamanship","common",20,0,0,0); var thiev
 var art = new CraftConstructor("art","skilled",30,0,0,0); var botany = new CraftConstructor("botany","skilled",30,0,0,0,0);
 var craftsman = new CraftConstructor("craftsman","skilled",30,0,0,0); var forging = new CraftConstructor("forging","skilled",30,0,0,0);
 var lorecraft = new CraftConstructor("lorecraft",30,0,0,0,0); var mercantilism = new CraftConstructor("mercantilism","skilled",30,0,0,0);
-var performance = new CraftConstructor("performance","skilled",30,0,0,0); var tinkering = new CraftConstructor("tinkering","skilled",30,0,0,0);
-var underworld = new CraftConstructor("underworld","skilled",30,0,0,0);
+var performance = new CraftConstructor("performance","skilled",30,0,0,0); var speechcraft = new CraftConstructor("speechcraft","skilled",30,0,0,0); 
+var tinkering = new CraftConstructor("tinkering","skilled",30,0,0,0); var underworld = new CraftConstructor("underworld","skilled",30,0,0,0);
     
         // Academic Crafts
 
@@ -461,6 +461,11 @@ function racialCraft(raceName){ // Function to acquire the racial crafts dependa
         performance.craftCost = 0;
         document.getElementById("performanceTab").innerHTML = performance.craftValue;
         document.getElementById("performanceCost").innerHTML = performance.craftCost;
+        speechcraft.craftValue = 0;
+        speechcraft.baseCraft = 0;
+        speechcraft.craftCost = 0;
+        document.getElementById("speechcraftTab").innerHTML = speechcraft.craftValue;
+        document.getElementById("speechcraftCost").innerHTML = speechcraft.craftCost;
         tinkering.craftValue = 0;
         tinkering.baseCraft = 0;
         tinkering.craftCost = 0;
@@ -714,6 +719,12 @@ function racialCraft(raceName){ // Function to acquire the racial crafts dependa
             performance.craftCost = 0;
             document.getElementById("performanceTab").innerHTML = performance.craftValue;
             document.getElementById("performanceCost").innerHTML = performance.craftCost;
+        }else if(chosenRacialCraft == "speechcraft"){
+        speechcraft.craftValue = 25;
+        speechcraft.baseCraft = 25;
+        speechcraft.craftCost = 0;
+        document.getElementById("speechcraftTab").innerHTML = speechcraft.craftValue;
+        document.getElementById("speechcraftCost").innerHTML = speechcraft.craftCost;
         }else if(chosenRacialCraft == "tinkering"){
             tinkering.craftValue = 25;
             tinkering.baseCraft = 25;
@@ -1210,6 +1221,11 @@ function craftIncrease(typeOfCraft,typeOfType){ // Button to increase ::
             tempCraftCost = performance.craftCost;
             tempLearningCost = performance.learningCost;
             limit = true;
+        }else if(typeOfCraft == "speechcraft" && speechcraft.craftValue >= 0 && speechcraft.craftValue < 100){
+            tempCraftValue = speechcraft.craftValue + 1;
+            tempCraftCost = speechcraft.craftCost;
+            tempLearningCost = speechcraft.learningCost;
+            limit = true;
         }else if(typeOfCraft == "tinkering" && tinkering.craftValue >= 0 && tinkering.craftValue < 100){
             tempCraftValue = tinkering.craftValue + 1;
             tempCraftCost = tinkering.craftCost;
@@ -1413,6 +1429,11 @@ function craftIncrease(typeOfCraft,typeOfType){ // Button to increase ::
         performance.craftCost = tempCraftCost;
         document.getElementById("performanceCost").innerHTML = performance.craftCost;
         document.getElementById("performanceTotal").innerHTML = performance.craftValue;
+    }else if(typeOfCraft == "speechcraft" && limit == true){
+        speechcraft.craftValue = tempCraftValue;
+        speechcraft.craftCost = tempCraftCost;
+        document.getElementById("speechcraftCost").innerHTML = speechcraft.craftCost;
+        document.getElementById("speechcraftTotal").innerHTML = speechcraft.craftValue;
     }else if(typeOfCraft == "tinkering" && limit == true){
         tinkering.craftValue = tempCraftValue;
         tinkering.craftCost = tempCraftCost;
@@ -1604,6 +1625,11 @@ function craftDecrease(typeOfCraft,typeOfType){ // Button to decrease ::
             tempCraftValue = performance.craftValue - 1;
             tempCraftCost = performance.craftCost;
             tempLearningCost = performance.learningCost;
+            limit = true;
+        }else if(typeOfCraft == "speechcraft" && speechcraft.craftValue > 0 && speechcraft.craftValue <= 100 && speechcraft.craftValue > speechcraft.baseCraft){
+            tempCraftValue = speechcraft.craftValue - 1;
+            tempCraftCost = speechcraft.craftCost;
+            tempLearningCost = speechcraft.learningCost;
             limit = true;
         }else if(typeOfCraft == "tinkering" && tinkering.craftValue > 0 && tinkering.craftValue <= 100 && tinkering.craftValue > tinkering.baseCraft){
             tempCraftValue = tinkering.craftValue - 1;
@@ -1865,7 +1891,7 @@ function craftDecrease(typeOfCraft,typeOfType){ // Button to decrease ::
 // - - - 
 
 function craftTotal(){
-    totalCraftCost =  berserker.craftCost +  smallWeapons.craftCost +  mediumWeapons.craftCost +  largeWeapons.craftCost +  maneuverability.craftCost +   martialRanged.craftCost +  simpleRanged.craftCost +   siegeRanged.craftCost +  mountedArchery.craftCost +  combatTactics.craftCost +   defense.craftCost + animalHandling.craftCost + athletics.craftCost + husbandry.craftCost + laborer.craftCost + riding.craftCost + survivalist.craftCost + seamanship.craftCost + thievery.craftCost + art.craftCost + botany.craftCost + craftsman.craftCost + forging.craftCost + lorecraft.craftCost + mercantilism.craftCost + performance.craftCost + tinkering.craftCost + underworld.craftCost + alchemy.craftCost + culture.craftCost + language.craftCost + linguistics.craftCost + litigation.craftCost + savant.craftCost + druidcraft.craftCost
+    totalCraftCost =  berserker.craftCost +  smallWeapons.craftCost +  mediumWeapons.craftCost +  largeWeapons.craftCost +  maneuverability.craftCost +   martialRanged.craftCost +  simpleRanged.craftCost +   siegeRanged.craftCost +  mountedArchery.craftCost +  combatTactics.craftCost +   defense.craftCost + animalHandling.craftCost + athletics.craftCost + husbandry.craftCost + laborer.craftCost + riding.craftCost + survivalist.craftCost + seamanship.craftCost + thievery.craftCost + art.craftCost + botany.craftCost + craftsman.craftCost + forging.craftCost + lorecraft.craftCost + mercantilism.craftCost + performance.craftCost + speechcraft.craftCost + tinkering.craftCost + underworld.craftCost + alchemy.craftCost + culture.craftCost + language.craftCost + linguistics.craftCost + litigation.craftCost + savant.craftCost + druidcraft.craftCost
     return totalCraftCost;
 }
 
